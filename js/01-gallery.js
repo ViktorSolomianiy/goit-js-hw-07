@@ -21,10 +21,10 @@ function onClick(evt) {
     ` <div class="modal"> <img src="${evt.target.dataset.source}" alt="Big Pictures"/> </div> `,
     {
       onShow: (instance) => {
-        cardsContainer.addEventListener("keydown", onEscapeButton);
+        document.addEventListener("keydown", onEscapeButton);
       },
       onClose: (instance) => {
-        cardsContainer.removeEventListener("keydown", onEscapeButton);
+        document.removeEventListener("keydown", onEscapeButton);
       },
     }
   );
