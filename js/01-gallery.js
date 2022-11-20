@@ -17,16 +17,40 @@ function onClick(evt) {
   }
   console.log(evt.target.nodeName);
 
-  const instance = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}" width="800" height="600">
-`);
+  const instance = basicLightbox.create(
+    ` <div class="modal"> <img src="${evt.target.dataset.source}" alt="Big Pictures"/> </div> `,
+    {
+      onShow: (instance) => {
+        cardsContainer.addEventListener("keydown", onEscapeButton);
+      },
+      onClose: (instance) => {
+        cardsContainer.removeEventListener("keydown", onEscapeButton);
+      },
+    }
+  );
   instance.show();
 
-  cardsContainer.addEventListener("keydown", (evt) => {
-    if (evt.code === "Escape") {
+  function onEscapeButton(evt) {
+    if (evt.key === "Escape") {
       instance.close();
     }
-  });
+    console.log(evt.code);
+  }
+
+  //   const instance = basicLightbox.create(
+  //     `
+  //     <img src="${evt.target.dataset.source}" width="800" height="600">
+  // `
+  //   );
+  //   instance.show();
+
+  //   document.addEventListener("keydown", (evt) => {
+  //     if (evt.code === "Escape") {
+  //       instance.close();
+  //     }
+
+  //     console.log(evt.code);
+  //   });
 }
 
 function createGalleryCards(images) {
